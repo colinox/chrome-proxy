@@ -1,0 +1,26 @@
+{
+    "manifest_version": 2,
+    "name": "前端开发接口",
+    "version": "1.0",
+    "description": "前端开发接口",
+    // "chrome_url_overrides":{
+    //     "newtab": "index.html"
+    // },
+    "homepage_url": "http://api.524411.com",
+    "icons": {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
+    },
+    "offline_enabled": true,
+    // "browser_action": {
+    //     // "default_title": "Set this page's color.",
+    //     // "default_icon": "icon.png",
+    //     "default_popup": "index.html"
+    // },
+    "content_scripts": [{
+        "matches": ["http://dev.sanjieke.cn/*","http://dev.sanjieke.cn:9966/*","http://dev.sanjieke.cn:8506/*","http://nuxt.sanjieke.cn/*"],
+        "js": ["ajaxhook.js"],
+        "run_at": "document_start"
+    }]
+}
