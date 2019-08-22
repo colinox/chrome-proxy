@@ -66,22 +66,26 @@
 })(window);
 hookAjax({
     open: function (arg, xhr) {
-        if (arg[1].indexOf("http") < 0) {
-            if (arg[1].indexOf("hot-update") > -1) {} else if (arg[1].substring(0, 5) != "/json") {
-                arg[1] = "http://api.524411.com" + arg[1]
-            }
-        } else {
+        if (arg[1].indexOf("http") > -1 || arg[1].indexOf("//") > -1 ) {
             var url = arg[1].split("//");
             if (url[1].substring(0, 4) == "test") {
                 var argUrl = url[1].split("sanjieke.cn");
-                arg[1] = "http://api.524411.com" + argUrl[1]
+                arg[1] = "http://api.524411.com" + argUrl[1];
             } else if (url[1].indexOf(": ") > -1) {
                 if (arg[1].substring(0, 5) != " /json") {
                     var argUrl = arg[1].split(": ");
                     argUrl = argUrl[2].slice(4);
                     arg[1] = "http: //api.524411.com" + argUrl
-                }
-            } else if (arg[1].indexOf("sockjs-node") > -1 || arg[1].indexOf("hot-update") > -1) {}
+                };
+            } else if (arg[1].indexOf("sockjs-node") > -1 || arg[1].indexOf("hot-update") > -1) {};
+        } else {
+            if (arg[1].indexOf("hot-update") > -1) {
+                arg[1] = arg[1]
+            } else if (arg[1].indexOf(".") > -1) {
+                arg[1] = arg[1].replace(new RegExp("(.+?)\/"), "http://api.524411.com/");
+            } else if (arg[1].substring(0, 5) != "/json") {
+                arg[1] = "http://api.524411.com" + arg[1];
+            }
         }
     }
 });
