@@ -77,7 +77,10 @@ hookAjax({
                     argUrl = argUrl[2].slice(4);
                     arg[1] = "http: //api.524411.com" + argUrl
                 };
-            } else if (arg[1].indexOf("sockjs-node") > -1 || arg[1].indexOf("hot-update") > -1) {};
+            } else if (arg[1].indexOf("sockjs-node") > -1 || arg[1].indexOf("hot-update") > -1) {
+            } else {
+                arg[1] = arg[1].replace(new RegExp("\/\/(.+?)\/"), "http://api.524411.com/");
+            }
         } else {
             if (arg[1].indexOf("hot-update") > -1) {
                 arg[1] = arg[1]
